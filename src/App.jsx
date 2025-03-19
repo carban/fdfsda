@@ -1,6 +1,19 @@
 import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-export default function SearchEngine() {
+function Footer(){
+  return (
+    <footer className="mt-auto w-full bg-gray-800 text-white text-center py-4">
+    <p>
+      <Link to="/" className="text-blue-400 text-xl hover:underline"> Gratzi </Link> |
+      <Link to="/como-funciona" className="text-blue-400 text-xl hover:underline"> ¿Cómo funciona? </Link> |
+      <Link to="/acerca-de" className="text-blue-400 text-xl hover:underline"> Acerca de </Link>
+    </p>
+  </footer>
+  )
+}
+
+function SearchEngine() {
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -15,8 +28,6 @@ export default function SearchEngine() {
   const handleSearch = async (e) => {
     e.preventDefault();
     setLoading(true);
-    // const data = {"answer":[{"href":"/clases/11887-reactjs/74504-que-es-react-y-cuales-son-sus-casos-de-uso/","image":"https://static.platzi.com/media/achievements/reactjs-patrones-render_badge-3c77e155-b04a-4c95-ac61-e2b6d2d5b92e-00753ce_R9qSoA6.webp","title":"Curso de React.js","teacher":"Por Estefany Aguilar","videos":[{"title":"¿Qué es ReactJS? ⚛️ ¿Cómo funciona? Explicación animada","url":"https://www.youtube.com/watch?v=bvxm389cYVI&pp=ygUIUmVhY3QuanM%3D"},{"title":"¿Qué es React.js y cómo funciona? - La mejor explicación en español","url":"https://www.youtube.com/watch?v=lWQ69WX7-hA&pp=ygUIUmVhY3QuanM%3D"},{"title":"Aprende React en 15 Minutos 📘","url":"https://www.youtube.com/watch?v=wGxDfSWC4Ww&pp=ygUIUmVhY3QuanM%3D"}],"title_emb":"curso de react.js"},{"href":"/clases/3219-react-redux-profesional/51177-ya-tomaste-el-curso-basico-de-redux/","image":"https://static.platzi.com/media/achievements/profesional-reactjs-redux-badge-d70e22d4-8d39-48be-a2a4-82945cd02e16.png","title":"Curso Profesional de React.js y Redux","teacher":"Por Mariangélica Useche","videos":[{"title":"Curso Profesional de React (firebase, hooks, redux, MaterialUI)","url":"https://www.youtube.com/watch?v=5DAEdXKp7QA&pp=ygUlQ3Vyc28gUHJvZmVzaW9uYWwgZGUgUmVhY3QuanMgeSBSZWR1eA%3D%3D"},{"title":"1. REACT con REDUX - CURSO PROFESIONAL","url":"https://www.youtube.com/watch?v=w8rRCNjj5W4&pp=ygUlQ3Vyc28gUHJvZmVzaW9uYWwgZGUgUmVhY3QuanMgeSBSZWR1eA%3D%3D"},{"title":"Curso Completo de React - La guía definitiva: Hooks, router, redux, next y muchos proyectos!","url":"https://www.youtube.com/watch?v=CvxPD5Acwgc&pp=ygUlQ3Vyc28gUHJvZmVzaW9uYWwgZGUgUmVhY3QuanMgeSBSZWR1eA%3D%3D"}],"title_emb":"curso profesional de react.js y redux"},{"href":"/clases/5481-react-typescript/57804-el-presente-del-frontend-es-typescript/","image":"https://static.platzi.com/media/achievements/piezas-react-typescript_badge-0b482f25-d778-492a-9cd8-d3b351e45667.png","title":"Curso de React.js con TypeScript","teacher":"Por Jonathan Alvarez","videos":[{"title":"Tutorial práctico: React y TypeScript paso a paso, crea tu primera aplicación","url":"https://www.youtube.com/watch?v=4lAYfsq-2TE&pp=ygUXUmVhY3QuanMgY29uIFR5cGVTY3JpcHQ%3D"},{"title":"How to use TypeScript with React... But should you?","url":"https://www.youtube.com/watch?v=ydkQlJhodio&pp=ygUXUmVhY3QuanMgY29uIFR5cGVTY3JpcHQ%3D"},{"title":"¿Utilizar REACT con Javascript o con Typescript? Invitado @midudev","url":"https://www.youtube.com/watch?v=rbPFyY-eGjQ&pp=ygUXUmVhY3QuanMgY29uIFR5cGVTY3JpcHQ%3D"}],"title_emb":"curso de react.js con typescript"},{"href":"/clases/2167-reactividad-vuejs/35415-como-convertirte-en-frontend-developer-con-vuejs/","image":"https://static.platzi.com/media/achievements/badge-vue-3-4b4c3cb0-ea25-4eac-957f-28eb09339383.png","title":"Curso de Reactividad con Vue.js 3","teacher":"Por Samuel Burbano","videos":[{"title":"Cómo usar la Reactividad en Vue 3","url":"https://www.youtube.com/watch?v=RVtsIAVPORA&pp=ygUYUmVhY3RpdmlkYWQgY29uIFZ1ZS5qcyAz"},{"title":"☘ Curso en Vue 3: Conociendo el sistema reactivo: REACTIVIDAD en Potencia #7","url":"https://www.youtube.com/watch?v=8rU5yervles&pp=ygUYUmVhY3RpdmlkYWQgY29uIFZ1ZS5qcyAz"},{"title":"La reactividad y componentes en un Proyecto Vue 3 | Curso de Vue.js 3 - 03","url":"https://www.youtube.com/watch?v=oeCfkrNyTk0&pp=ygUYUmVhY3RpdmlkYWQgY29uIFZ1ZS5qcyAz"}],"title_emb":"curso de reactividad con vue.js 3"}]}
-    // setResults(data.answer); // Simulate search results
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -26,7 +37,7 @@ export default function SearchEngine() {
     });
     const data = await response.json();
     setLoading(false);
-    setResults(data.answer)
+    setResults(data.answer);
   };
 
   return (
@@ -115,10 +126,69 @@ export default function SearchEngine() {
           </table>
         </div>
       )}
-      {/* Footer */}
-      <footer className="mt-auto w-full bg-gray-800 text-white text-center py-4">
-        <p>¿Cómo funciona? | Acerca de</p>
-      </footer>
+      <Footer />
     </div>
+  );
+}
+
+function ComoFunciona() {
+  return <div className="p-10 text-center mt-10">
+    <h2 className="text-3xl">Gratzi funciona gracias al poder de la <b>Búsqueda Semántica</b></h2>
+    <center>
+    <img src="https://raw.githubusercontent.com/UKPLab/sentence-transformers/master/docs/img/SemanticSearch.png" alt="Logo" class="m-15"  />
+    </center>
+    <div class="max-w-5xl  mx-auto p-6 bg-white rounded-lg mt-10 mb-10">
+        <h1 class="text-3xl font-bol mb-4">¿Qué es un buscador semántico?</h1>
+        <p class="text-lg leading-relaxed">Un <strong>buscador semántico</strong> es un sistema de búsqueda que comprende el significado de las palabras y la intención del usuario en lugar de simplemente coincidir términos exactos. A diferencia de los motores de búsqueda tradicionales, que comparan palabras clave en los documentos, un buscador semántico analiza el contexto y la relación entre los términos para ofrecer resultados más precisos y relevantes.</p>
+        <h1 class="text-3xl font-bol mb-4 mt-4">¿Cómo Gratzi lo usa?</h1>
+        <p class="text-lg leading-relaxed mt-4 mb-4">
+          Gratzi toma un query como por ejemplo <i>"Marketing"</i> lo descompone en un vector <b>(embedding)</b> y busca los vectores <b>(documentos)</b> más <i>parecidos</i> en el espacio vectorial, muy parecido a la visualización de la imagen arriba.
+        </p>
+        <h1 class="text-3xl font-bol mb-4 mt-4">¿Cuáles documentos?</h1>
+        <p class="text-lg leading-relaxed mt-4 mb-4">
+          Para la recolección de documentos (datos y links de cursos) escribí <b>dos</b> scrapers:
+          <ul>
+            <li><b>Platzi Scraper:</b> Script creado con <b>Beautiful Soup</b> para recorrer y extraer los datos de <a className="text-blue-800" href="https://platzi.com/cursos/">https://platzi.com/cursos/</a></li>
+            <li><b>Youtube Scraper:</b> Script creado con <b>Playwright</b> para navegar hasta YouTube y extraer los primeros 3 videos relacionados a un curso en específico</li>
+          </ul>
+        </p>
+
+    </div>    
+    <Footer />
+  </div>;
+}
+
+function AcercaDe() {
+  return <div className="p-10 text-center mt-10">
+  <h2 className="text-3xl">Esto es una Demo</h2>
+  <div class="max-w-5xl  mx-auto p-6 bg-white rounded-lg mt-10 mb-10">
+      <p class="text-lg leading-relaxed">Desarrollé esta <b>prueba de concepto</b> para poner en práctica mis habilidades como Data Scientist </p>
+      <p class="text-lg leading-relaxed">Cosas por mejorar <b><i>sí, muchas</i></b> el feedback es bienvenido</p>
+      {/* <p class="text-lg leading-relaxed">Si <b>Freddy</b> o <b>Christian</b> ven esto, por favor no me demanden 😅</p> */}
+      <p class="text-lg leading-relaxed">Otros proyectos en los que estoy trabajando:</p>
+      <h1 class="text-3xl mb-4 mt-8">Mis Proyectos</h1>
+      <ul>
+        <li><a className="text-blue-800 text-lg" href="https://fooapi.com">FooApi</a></li>
+        <li><a className="text-blue-800 text-lg" href="https://3d-ivory.vercel.app/">3D World Data</a></li>
+      </ul>
+      <h1 class="text-3xl mb-4 mt-4">Artículos</h1>
+      <ul>
+        <li><a className="text-blue-800 text-lg" href="https://dev.to/carban/the-all-in-one-fake-api-for-developers-3hpn">The All-in-One Fake API for you</a></li>
+        <li><a className="text-blue-800 text-lg" href="https://dev.to/carban/3d-data-world-explorer-po9">3D Data World Explorer</a></li>
+      </ul>
+  </div>    
+  <Footer />
+</div>;
+}
+
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<SearchEngine />} />
+        <Route path="/como-funciona" element={<ComoFunciona />} />
+        <Route path="/acerca-de" element={<AcercaDe />} />
+      </Routes>
+    </Router>
   );
 }
